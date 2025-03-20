@@ -1,0 +1,70 @@
+﻿<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} - Alış-Veriş</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <style>
+       
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="Header">
+            <nav class="container mx-auto px-4 py-3">
+                <div class="flex justify-between items-center">
+                    <a href="/Home/Index" class="text-2xl font-bold" style="color: #5F5F5F; ">Alış-Veriş</a>
+
+                    <div class="relative catalog-button ">
+                        <button class="flex items-center space-x-1 font-bold" style="color: #5F5F5F; ">
+                            <span>Каталог</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="catalog-dropdown p-4">
+                            <div class="grid grid-cols-2 gap-8">
+                                <div>
+                                    <h3 class="text-lg font-semibold mb-4">Mac</h3>
+                                    <ul class="space-y-2">
+                                        <li><a href="/Macbook" class="text-gray-600 hover:text-blue-600">MacBook Pro</a></li>
+                                        <li><a href="#" class="text-gray-600 hover:text-blue-600">MacBook Air</a></li>
+                                        <li><a href="#" class="text-gray-600 hover:text-blue-600">iMac</a></li>
+                                        <li><a href="#" class="text-gray-600 hover:text-blue-600">Mac mini</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold mb-4">iPhone и iPad</h3>
+                                    <ul class="space-y-2">
+                                        <li><a href="/Iphone" class="text-gray-600 hover:text-blue-600">iPhone 14 Pro</a></li>
+                                        <li><a href="#" class="text-gray-600 hover:text-blue-600">iPhone 14</a></li>
+                                        <li><a href="/Ipad" class="text-gray-600 hover:text-blue-600">iPad Air</a></li>
+                                        <li><a href="#" class="text-gray-600 hover:text-blue-600">iPad Pro</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <input type="text" size="90" placeholder="Поиск товаров..."
+                               class=" font-bold w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+
+                        <a href="/Home/Login" class="font-bold" style="color: #5F5F5F;">Войти</a>
+                        <a href="/Home/Register" class="font-bold" style="color: #5F5F5F;">Регистрация</a>
+                        <a href="/Home/Cart" class="font-bold" style="color: #5F5F5F;">Корзина</a>
+                    </div>
+                </div>
+            </nav>
+       </div>
+    </header>
+</body>

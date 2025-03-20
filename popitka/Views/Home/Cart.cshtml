@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+
+<body class="bg-gray-50">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 class="text-3xl font-extrabold text-gray-900 mb-8">Корзина покупок</h1>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Товары в корзине -->
+            <div class="lg:col-span-8">
+                <div class="bg-white shadow-sm rounded-lg">
+                    <!-- Товар 1 -->
+                    <div class="p-6 border-b">
+                        <div class="flex items-center">
+                            <img src="https://via.placeholder.com/150" alt="iPhone 14 Pro" class="w-24 h-24 object-cover rounded">
+                            <div class="ml-6 flex-1">
+                                <div class="flex justify-between">
+                                    <h3 class="text-lg font-medium text-gray-900">iPhone 14 Pro</h3>
+                                    <p class="text-lg font-medium text-gray-900">$999</p>
+                                </div>
+                                <p class="mt-1 text-sm text-gray-500">Космический серый</p>
+                                <div class="mt-4 flex items-center">
+                                    <select class="rounded-md border-gray-300 py-1.5 text-base focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                    <button class="ml-4 text-sm font-medium text-blue-600 hover:text-blue-500">Удалить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Товар 2 -->
+                    <div class="p-6">
+                        <div class="flex items-center">
+                            <img src="https://via.placeholder.com/150" alt="MacBook Pro" class="w-24 h-24 object-cover rounded">
+                            <div class="ml-6 flex-1">
+                                <div class="flex justify-between">
+                                    <h3 class="text-lg font-medium text-gray-900">MacBook Pro</h3>
+                                    <p class="text-lg font-medium text-gray-900">$1299</p>
+                                </div>
+                                <p class="mt-1 text-sm text-gray-500">Космический серый, 16 ГБ ОЗУ</p>
+                                <div class="mt-4 flex items-center">
+                                    <select class="rounded-md border-gray-300 py-1.5 text-base focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                    <button class="ml-4 text-sm font-medium text-blue-600 hover:text-blue-500">Удалить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Итог заказа -->
+            <div class="lg:col-span-4">
+                <div class="bg-white shadow-sm rounded-lg p-6">
+                    <h2 class="text-lg font-medium text-gray-900">Итог заказа</h2>
+
+                    <dl class="mt-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <dt class="text-sm text-gray-600">Промежуточный итог</dt>
+                            <dd class="text-sm font-medium text-gray-900">$2,298.00</dd>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <dt class="text-sm text-gray-600">Доставка</dt>
+                            <dd class="text-sm font-medium text-gray-900">$12.99</dd>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <dt class="text-sm text-gray-600">Налог</dt>
+                            <dd class="text-sm font-medium text-gray-900">$183.84</dd>
+                        </div>
+
+                        <div class="border-t pt-4 flex items-center justify-between">
+                            <dt class="text-base font-medium text-gray-900">Общая сумма</dt>
+                            <dd class="text-base font-medium text-gray-900">$2,494.83</dd>
+                        </div>
+                    </dl>
+
+                    <div class="mt-6">
+                       
+                        <a href="/Home/Checkout" class="w-full bg-blue-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 text-center block">
+                            Оформить заказ
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

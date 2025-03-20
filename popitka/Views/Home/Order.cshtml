@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<body class="bg-gray-50">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        
+                        <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
+                            <a href="/Profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Профиль</a>
+                            <a href="/Orders" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">История заказов</a>
+                            <a href="/Login" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Выйти</a>
+                        </div>
+            
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-3xl font-bold mb-8">История заказов</h1>
+
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="divide-y divide-gray-200">
+                    <!-- Order 1 -->
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-lg font-semibold">Заказ #12345</h3>
+                                <p class="text-sm text-gray-500">Оформлен 15 марта 2024</p>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                Доставлен
+                            </span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-7inch-deeppurple?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1663703841896"
+                                     alt="iPhone 14 Pro"
+                                     class="w-16 h-16 object-cover rounded">
+                                <div class="ml-4">
+                                    <h4 class="font-medium">iPhone 14 Pro</h4>
+                                    <p class="text-sm text-gray-500">Цвет: Deep Purple, 256GB</p>
+                                </div>
+                                <div class="ml-auto">
+                                    <p class="font-medium">999$</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <p class="font-medium">Итого: 999$</p>
+                            <button class="text-blue-600 hover:text-blue-800">
+                                Повторить заказ
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Order 2 -->
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-lg font-semibold">Заказ #12344</h3>
+                                <p class="text-sm text-gray-500">Оформлен 10 марта 2024</p>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                В пути
+                            </span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp-14-spacegray-select-202301?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1671304673229"
+                                     alt="MacBook Pro"
+                                     class="w-16 h-16 object-cover rounded">
+                                <div class="ml-4">
+                                    <h4 class="font-medium">MacBook Pro 14"</h4>
+                                    <p class="text-sm text-gray-500">Space Gray, M2 Pro</p>
+                                </div>
+                                <div class="ml-auto">
+                                    <p class="font-medium">1999$</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <p class="font-medium">Итого: 1999$</p>
+                            <button class="text-blue-600 hover:text-blue-800">
+                                Отследить заказ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+    // Profile dropdown
+        const profileMenu = document.getElementById('profileMenu');
+        const profileDropdown = document.getElementById('profileDropdown');
+
+        profileMenu.addEventListener('click', () => {
+            profileDropdown.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!profileMenu.contains(e.target)) {
+                profileDropdown.classList.add('hidden');
+            }
+        });
+    </script>
+
+</body>
+</html>             
