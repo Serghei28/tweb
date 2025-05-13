@@ -1,15 +1,22 @@
-﻿<div class="register-page">
+﻿@{
+    ViewBag.Title = "Регистрация";
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
+
+<div class="register-page">
     <div class="container">
         <div class="heading">Создайте аккаунт</div>
-        <form action="" class="form">
-            <input required="" class="input" type="text" name="name" placeholder="Полное имя">
-            <input required="" class="input" type="email" name="email" placeholder="Электронная почта">
-            <input required="" class="input" type="password" name="password" placeholder="Пароль">
-            <input class="register-button" type="submit" value="Зарегистрироваться">
-        </form>
+
+        @* Razor-форма для регистрации *@
+    <form method="post" action="/Home/Register" class="form">
+        <input required class="input" type="text" name="fullName" placeholder="Полное имя" />
+        <input required class="input" type="email" name="email" placeholder="Электронная почта" />
+        <input required class="input" type="password" name="password" placeholder="Пароль" />
+        <input class="register-button" type="submit" value="Зарегистрироваться" />
+    </form>
 
         <div class="social-account-container">
-            <span class="title">Зарегистрироваться с помощью</span>
+            <span class="title">Войти с помощью</span>
             <div class="social-accounts">
                 <button class="social-button google">
                     <svg class="svg" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 488 512">

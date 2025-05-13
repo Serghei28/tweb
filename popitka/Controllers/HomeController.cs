@@ -1,4 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using YourProject.Domain.Models;
+using tweb.DAL.Data;
+using System.Linq;
+
 
 namespace popitka.Controllers
 {
@@ -15,6 +20,32 @@ namespace popitka.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult Register(string fullName, string email, string password)
+        {
+            var parts = fullName.Trim().Split(' ');
+            string firstName = parts.Length > 0 ? parts[0] : "";
+            string lastName = parts.Length > 1 ? string.Join(" ", parts.Skip(1)) : "";
+
+            var user = new User
+            {
+                Email = email,
+                FirstName = firstName,
+                LastName = lastName,
+                Phone = "", // если поля нет, можно оставить пустым
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            using (var db = new AppDbContext())
+            {
+                db.Users.Add(user);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
+
 
         public ActionResult Product()
         {
@@ -66,4 +97,5 @@ namespace popitka.Controllers
             return View();
         }
     }
+
 }
