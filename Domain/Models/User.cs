@@ -13,6 +13,8 @@ namespace YourProject.Domain.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
+        public User() { } 
+
         public User(int id, string email, string firstName, string lastName, string phone)
         {
             Id = id;
@@ -22,6 +24,7 @@ namespace YourProject.Domain.Models
             Phone = phone;
         }
     }
+
 
     public class Address
     {
