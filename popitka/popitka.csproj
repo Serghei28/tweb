@@ -123,7 +123,7 @@
     <Content Include="Views\Home\Macbook.cshtml" />
     <Content Include="Views\Home\Checkout.cshtml" />
     <Content Include="Views\Home\Order.cshtml" />
-    <Content Include="Views\Home\Profile.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
     <Content Include="Views\Shared\LayoutHeader.cshtml" />
     <Content Include="Views\Shared\LayoutFooter.cshtml" />
     <None Include="Web.Debug.config">
