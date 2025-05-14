@@ -1,0 +1,54 @@
+﻿@model YourProject.Domain.Models.Product
+@{
+    ViewBag.Title = Model.Id == 0 ? "Добавить товар" : "Редактировать товар";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="container mx-auto px-4 py-10">
+    <div class="product-form max-w-3xl mx-auto bg-white rounded-lg shadow-md p-8">
+        <h1 class="text-3xl font-bold mb-6">@ViewBag.Title</h1>
+
+        @using (Html.BeginForm("AddOrEditProduct", "Home", FormMethod.Post))
+        {
+            @Html.HiddenFor(m => m.Id)
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Название</label>
+                    @Html.TextBoxFor(m => m.Name, new { @class = "input w-full" })
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Цена</label>
+                    @Html.TextBoxFor(m => m.Price, new { @class = "input w-full", type = "number", step = "0.01" })
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Категория</label>
+                    @Html.EnumDropDownListFor(m => m.Category, new { @class = "input w-full" })
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Количество в наличии</label>
+                    @Html.TextBoxFor(m => m.Stock, new { @class = "input w-full", type = "number" })
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <label class="block text-sm font-medium text-gray-700">Описание</label>
+                @Html.TextAreaFor(m => m.Description, 5, 50, new { @class = "input w-full" })
+            </div>
+
+            <div class="mt-6">
+                <label class="block text-sm font-medium text-gray-700">Ссылка на изображение (URL)</label>
+                @Html.TextBoxFor(m => m.ImageUrl, new { @class = "input w-full", placeholder = "https://..." })
+            </div>
+
+            <div class="mt-6 flex justify-end">
+                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                    Сохранить
+                </button>
+            </div>
+        }
+    </div>
+</main>

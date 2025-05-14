@@ -14,6 +14,7 @@ namespace YourProject.Domain.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
+        public bool IsAdmin { get; set; } = false;
         public User() { }
 
         public User(int id, string email, string password, string firstName, string lastName, string phone)

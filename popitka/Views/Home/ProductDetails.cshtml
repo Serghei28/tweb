@@ -1,0 +1,32 @@
+﻿@model YourProject.Domain.Models.Product
+@{
+    ViewBag.Title = "Детали товара";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="container mx-auto px-4 py-8">
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <img src="@Model.ImageUrl" alt="@Model.Name" class="rounded w-full max-w-sm mx-auto" />
+            </div>
+            <div>
+                <h1 class="text-3xl font-bold mb-4">@Model.Name</h1>
+                <p class="text-lg mb-4">@Model.Description</p>
+                <p class="text-xl font-semibold text-green-600 mb-4">@Model.Price.ToString("C")</p>
+                <p class="text-sm text-gray-500 mb-4">В наличии: @Model.Stock шт.</p>
+
+                @if (Model.Specs != null && Model.Specs.Any())
+                {
+                    <h3 class="text-md font-bold mb-2">Характеристики:</h3>
+                    <ul class="list-disc list-inside text-sm text-gray-700">
+                        @foreach (var spec in Model.Specs)
+                        {
+                            <li><strong>@spec.Key:</strong> @spec.Value</li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</main>
