@@ -1,0 +1,84 @@
+﻿@model popitka.ViewModels.AdminPanelViewModel
+@{
+    ViewBag.Title = "Админ-панель";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="container mx-auto px-4 py-10">
+    <h1 class="text-4xl font-bold text-center mb-10">Админ-панель</h1>
+
+    <!-- Заказы -->
+    <section class="mb-16">
+        <h2 class="text-2xl font-semibold mb-6">Список заказов</h2>
+        <div class="overflow-x-auto bg-white shadow-md rounded-lg p-4">
+            <table class="min-w-full table-auto">
+                <thead class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                    <tr>
+                        <th class="py-3 px-6 text-left">ID</th>
+                        <th class="py-3 px-6 text-left">Пользователь</th>
+                        <th class="py-3 px-6 text-left">Сумма</th>
+                        <th class="py-3 px-6 text-left">Статус</th>
+                        <th class="py-3 px-6 text-left">Дата</th>
+                        <th class="py-3 px-6 text-left">Действия</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700 text-sm">
+                    @foreach (var order in Model.Orders)
+                    {
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-2 px-6">@order.Id</td>
+                            <td class="py-2 px-6">@order.UserId</td>
+                            <td class="py-2 px-6">@order.TotalAmount.ToString("C")</td>
+                            <td class="py-2 px-6">@order.Status</td>
+                            <td class="py-2 px-6">@order.CreatedAt.ToShortDateString()</td>
+                            <td class="py-2 px-6 space-x-2">
+                                <a href="#" class="text-blue-500 hover:underline">Редактировать</a>
+                                <a href="#" class="text-red-500 hover:underline">Удалить</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Пользователи -->
+    <section>
+        <h2 class="text-2xl font-semibold mb-6">Пользователи</h2>
+        <div class="overflow-x-auto bg-white shadow-md rounded-lg p-4">
+            <table class="min-w-full table-auto">
+                <thead class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                    <tr>
+                        <th class="py-3 px-6 text-left">ID</th>
+                        <th class="py-3 px-6 text-left">Имя</th>
+                        <th class="py-3 px-6 text-left">Email</th>
+                        <th class="py-3 px-6 text-left">Телефон</th>
+                        <th class="py-3 px-6 text-left">Дата</th>
+                        <th class="py-3 px-6 text-left">Роль</th>
+                        <th class="py-3 px-6 text-left">Действия</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700 text-sm">
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-2 px-6">@user.Id</td>
+                            <td class="py-2 px-6">@user.FirstName @user.LastName</td>
+                            <td class="py-2 px-6">@user.Email</td>
+                            <td class="py-2 px-6">@user.Phone</td>
+                            <td class="py-2 px-6">@user.CreatedAt.ToShortDateString()</td>
+                            <td class="py-2 px-6">
+                                @(user.IsAdmin ? "Админ" : "Пользователь")
+                            </td>
+                            <td class="py-2 px-6 space-x-2">
+                                <a href="#" class="text-blue-500 hover:underline">Изменить</a>
+                                <a href="#" class="text-red-500 hover:underline">Удалить</a>
+                                <a href="#" class="text-yellow-500 hover:underline">Бан</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
