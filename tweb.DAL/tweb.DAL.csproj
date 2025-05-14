@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{52297C1F-5D40-42E4-8D35-085591049A57}</ProjectGuid>
+    <ProjectGuid>{159C0406-D3AE-4F62-A796-38439DD15E9C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BusinesLogic</RootNamespace>
-    <AssemblyName>BusinesLogic</AssemblyName>
+    <RootNamespace>tweb.DAL</RootNamespace>
+    <AssemblyName>tweb.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -51,20 +51,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\BaseAPI.cs" />
-    <Compile Include="API\OrderAPI.cs" />
-    <Compile Include="API\PaymentAPI.cs" />
-    <Compile Include="API\ProductAPI.cs" />
-    <Compile Include="API\UserAPI.cs" />
-    <Compile Include="BusinessLogic.cs" />
-    <Compile Include="Implementation\OrderService.cs" />
-    <Compile Include="Implementation\PaymentService.cs" />
-    <Compile Include="Implementation\ProductService.cs" />
-    <Compile Include="Implementation\UserService.cs" />
-    <Compile Include="Interfaces\IOrderService.cs" />
-    <Compile Include="Interfaces\IPaymentService.cs" />
-    <Compile Include="Interfaces\IProductService.cs" />
-    <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Data\AppDbContext.cs" />
+    <Compile Include="Migrations\202505130807005_InitialCreate.cs" />
+    <Compile Include="Migrations\202505130807005_InitialCreate.Designer.cs">
+      <DependentUpon>202505130807005_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505131848123_AddPasswordToUser.cs" />
+    <Compile Include="Migrations\202505131848123_AddPasswordToUser.Designer.cs">
+      <DependentUpon>202505131848123_AddPasswordToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505131914184_AddPasswordToUser1.cs" />
+    <Compile Include="Migrations\202505131914184_AddPasswordToUser1.Designer.cs">
+      <DependentUpon>202505131914184_AddPasswordToUser1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,18 +73,21 @@
       <Project>{b8ec8742-5dac-42d1-9b88-8e49d7d5cfd6}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Helper\Helper.csproj">
-      <Project>{d3d3b00c-308e-42c5-94c7-e88572b42e20}</Project>
-      <Name>Helper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\tweb.DAL\tweb.DAL.csproj">
-      <Project>{159c0406-d3ae-4f62-a796-38439dd15e9c}</Project>
-      <Name>tweb.DAL</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202505130807005_InitialCreate.resx">
+      <DependentUpon>202505130807005_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505131848123_AddPasswordToUser.resx">
+      <DependentUpon>202505131848123_AddPasswordToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505131914184_AddPasswordToUser1.resx">
+      <DependentUpon>202505131914184_AddPasswordToUser1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

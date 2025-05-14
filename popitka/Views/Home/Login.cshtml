@@ -1,12 +1,10 @@
 ﻿<div class="login-page">
     <div class="container">
         <div class="heading">Вход</div>
-        <form action="" class="form">
-            <input required="" class="input" type="email" name="email" placeholder="Логин">
-            <input required="" class="input" type="password" name="password" id="password" placeholder="Пароль">
-            <span class="forgot-password"><a href="#">Забыли пароль ?</a></span>
-            <input class="login-button" type="button" value="Войти" onclick="location.href='/Home/Profile'">
-
+        <form method="post" action="/Home/Login" class="form">
+            <input required class="input" type="email" name="email" placeholder="Email" />
+            <input required class="input" type="password" name="password" placeholder="Пароль" />
+            <input class="login-button" type="submit" value="Войти" />
         </form>
         <div class="social-account-container">
             <span class="title">Войти с помощью</span>

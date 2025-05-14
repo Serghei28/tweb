@@ -7,21 +7,27 @@ namespace YourProject.Domain.Models
     {
         public int Id { get; set; }
         public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty; // ← вот это нужно
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
-        public User(int id, string email, string firstName, string lastName, string phone)
+        public User() { }
+
+        public User(int id, string email, string password, string firstName, string lastName, string phone)
         {
             Id = id;
             Email = email;
+            Password = password;
             FirstName = firstName;
             LastName = lastName;
             Phone = phone;
         }
     }
+
+
 
     public class Address
     {
