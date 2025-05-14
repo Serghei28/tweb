@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<YourProject.Domain.Models.Product>
+<!DOCTYPE html>
 <html lang="ru">
 <body>
 
     <div class="star">
-        <section >
+        <section>
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                     <div>
@@ -23,37 +24,58 @@
         </section>
     </div>
 
+    <main class="container mx-auto px-4 py-8" id="products">
+        <section class="mb-12">
+            <h1 class="text-4xl font-bold text-center mb-8">Добро пожаловать в Alış-Veriş</h1>
 
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                @foreach (var product in Model)
+                {
+                    <div class="product-card bg-white rounded-lg shadow-md p-4 text-center hover:shadow-lg transition">
+                        <!-- Оборачиваем в ссылку на страницу товара -->
+                        <a href="@Url.Action("ProductDetails", "Home", new { id = product.Id })" style="text-decoration: none; color: inherit;">
+                            <img src="@product.ImageUrl" alt="@product.Name" class="product-image mb-4 w-full h-48 object-contain" />
+                            <h3 class="text-xl font-semibold">@product.Name</h3>
+                            <p class="text-gray-600 mb-2">@product.Description</p>
+                            <p class="text-blue-600 font-bold mb-4">@product.Price.ToString("C")</p>
+                        </a>
 
-<main class="container mx-auto px-4 py-8">
-    <section class="mb-12">
-        <h1 class="text-4xl font-bold text-center mb-8">Добро пожаловать в Alış-Veriş</h1>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-7inch-deeppurple?wid=5120&amp;hei=2880&amp;fmt=p-jpg&amp;qlt=80&amp;.v=1663703841896" alt="iPhone 14 Pro" class="product-image w-full h-64 object-cover">
-                <h3 class="text-xl font-semibold mb-2">iPhone 14 Pro</h3>
-                <p class="text-gray-600 mb-2">$999</p>
-                <a href="Product" class="text-blue-600 hover:underline">Подробнее</a>
+                        @if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
+                        {
+                            <div class="flex justify-center gap-4 mt-2">
+                                <a href="@Url.Action("AddOrEditProduct", "Home", new { id = product.Id })" title="Редактировать" class="text-yellow-500 hover:text-yellow-700 text-xl">
+                                    ✏️
+                                </a>
+                                @using (Html.BeginForm("DeleteProduct", "Home", FormMethod.Post, new { @class = "inline" }))
+                                {
+                                    @Html.Hidden("id", product.Id)
+                                    <button type="submit" title="Удалить" onclick="return confirm('Удалить товар?')" class="inline bg-transparent border-none text-red-600">
+                                        🗑
+                                    </button>
+                                }
+                            </div>
+                        }
+                    </div>
+                }
             </div>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <img src="https://via.placeholder.com/300" alt="Product" class="w-full h-48 object-cover rounded mb-4">
-                <h3 class="text-xl font-semibold mb-2">MacBook Pro</h3>
-                <p class="text-gray-600 mb-2">$1299</p>
-                <a href="Macbook" class="text-blue-600 hover:underline">Подробнее</a>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <img src="https://via.placeholder.com/300" alt="Product" class="w-full h-48 object-cover rounded mb-4">
-                <h3 class="text-xl font-semibold mb-2">iPad Air</h3>
-                <p class="text-gray-600 mb-2">$599</p>
-                <a href="Ipad" class="text-blue-600 hover:underline">Подробнее</a>
-            </div>
-        </div>
-    </section>
-</main>
-
-
-
-
+        </section>
+    </main>
 
 </body>
 </html>
+
+<script>
+    $(document).on("click", ".delete-product", function () {
+        const id = $(this).data("id");
+
+        if (!confirm("Удалить этот товар?")) return;
+
+        $.post("/Home/DeleteProduct", { id: id })
+            .done(function () {
+                location.reload();
+            })
+            .fail(function () {
+                alert("Ошибка при удалении.");
+            });
+    });
+</script>

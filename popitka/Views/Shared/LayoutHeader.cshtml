@@ -1,13 +1,19 @@
-﻿<head>
+﻿@{
+    var isAdmin = Session["IsAdmin"] != null && (bool)Session["IsAdmin"];
+    var userName = Session["UserName"]?.ToString();
+}
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title} - Alış-Veriş</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="~/Content/Site.css" rel="stylesheet" />
     <style>
-       
     </style>
 </head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <body class="bg-gray-50">
     <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
@@ -58,23 +64,34 @@
                     </div>
 
                     <div class="flex items-center gap-4">
-                        @if (Session["UserId"] == null)
+                        @if (isAdmin)
                         {
-                            <a href="/Home/Login" class="font-bold" style="color: #5F5F5F;">Войти</a>
-                            <a href="/Home/Register" class="font-bold" style="color: #5F5F5F;">Регистрация</a>
+                            <a href="/Home/AddOrEditProduct" class="font-bold" title="Добавить товар">➕</a>
                         }
                         else
                         {
-                            <a href="/Home/UserProfile" class="font-bold">Привет, @Session["UserName"]</a>
-
-                            <a href="/Home/Logout" class="font-bold" style="color: #5F5F5F;">Выход</a>
+                            <a href="/Home/Cart" class="font-bold">Корзина</a>
                         }
 
-                        <a href="/Home/Cart" class="font-bold" style="color: #5F5F5F;">Корзина</a>
+                        @if (isAdmin)
+                        {
+                            <a href="/Home/AdminPanel" class="font-bold">Админ: @userName</a>
+                            <a href="/Home/Logout" class="font-bold" style="color: #5F5F5F;">Выход</a>
+                        }
+                        else if (userName != null)
+                        {
+                            <a href="/Home/UserProfile" class="font-bold">Привет, @userName</a>
+                            <a href="/Home/Logout" class="font-bold" style="color: #5F5F5F;">Выход</a>
+                        }
+                        else
+                        {
+                            <a href="/Home/Login" class="font-bold">Войти</a>
+                        }
                     </div>
+
 
                 </div>
             </nav>
-       </div>
+        </div>
     </header>
 </body>

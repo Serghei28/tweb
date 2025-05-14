@@ -65,6 +65,26 @@
     <Compile Include="Migrations\202505131914184_AddPasswordToUser1.Designer.cs">
       <DependentUpon>202505131914184_AddPasswordToUser1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505141012256_AddProductAndOrderTables.cs" />
+    <Compile Include="Migrations\202505141012256_AddProductAndOrderTables.Designer.cs">
+      <DependentUpon>202505141012256_AddProductAndOrderTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505141026506_UpdateModel.cs" />
+    <Compile Include="Migrations\202505141026506_UpdateModel.Designer.cs">
+      <DependentUpon>202505141026506_UpdateModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505141034044_AddIsAdminToUser.cs" />
+    <Compile Include="Migrations\202505141034044_AddIsAdminToUser.Designer.cs">
+      <DependentUpon>202505141034044_AddIsAdminToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505141129319_AddIsAdminToUser1.cs" />
+    <Compile Include="Migrations\202505141129319_AddIsAdminToUser1.Designer.cs">
+      <DependentUpon>202505141129319_AddIsAdminToUser1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505141315297_UpdateModels.cs" />
+    <Compile Include="Migrations\202505141315297_UpdateModels.Designer.cs">
+      <DependentUpon>202505141315297_UpdateModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,6 +107,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505131914184_AddPasswordToUser1.resx">
       <DependentUpon>202505131914184_AddPasswordToUser1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505141012256_AddProductAndOrderTables.resx">
+      <DependentUpon>202505141012256_AddProductAndOrderTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505141026506_UpdateModel.resx">
+      <DependentUpon>202505141026506_UpdateModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505141034044_AddIsAdminToUser.resx">
+      <DependentUpon>202505141034044_AddIsAdminToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505141129319_AddIsAdminToUser1.resx">
+      <DependentUpon>202505141129319_AddIsAdminToUser1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505141315297_UpdateModels.resx">
+      <DependentUpon>202505141315297_UpdateModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

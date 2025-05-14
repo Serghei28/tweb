@@ -21,6 +21,8 @@ namespace YourProject.Domain.Models
         public int Quantity { get; set; }
         public decimal Price { get; set; }
 
+        public OrderItem() { }
+
         public OrderItem(int id, int orderId, int productId, Product product, int quantity, decimal price)
         {
             Id = id;
@@ -44,7 +46,10 @@ namespace YourProject.Domain.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
-        // Новый конструктор
+        // 🔧 Добавлен конструктор без параметров
+        public Order() { }
+
+        // Конструктор с параметрами
         public Order(int id, int userId, int shippingAddressId, OrderStatus status, DateTime createdAt, List<OrderItem> items)
         {
             Id = id;
