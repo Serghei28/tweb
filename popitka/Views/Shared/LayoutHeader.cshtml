@@ -58,11 +58,21 @@
                     </div>
 
                     <div class="flex items-center gap-4">
+                        @if (Session["UserId"] == null)
+                        {
+                            <a href="/Home/Login" class="font-bold" style="color: #5F5F5F;">Войти</a>
+                            <a href="/Home/Register" class="font-bold" style="color: #5F5F5F;">Регистрация</a>
+                        }
+                        else
+                        {
+                            <a href="/Home/UserProfile" class="font-bold">Привет, @Session["UserName"]</a>
 
-                        <a href="/Home/Login" class="font-bold" style="color: #5F5F5F;">Войти</a>
-                        <a href="/Home/Register" class="font-bold" style="color: #5F5F5F;">Регистрация</a>
+                            <a href="/Home/Logout" class="font-bold" style="color: #5F5F5F;">Выход</a>
+                        }
+
                         <a href="/Home/Cart" class="font-bold" style="color: #5F5F5F;">Корзина</a>
                     </div>
+
                 </div>
             </nav>
        </div>

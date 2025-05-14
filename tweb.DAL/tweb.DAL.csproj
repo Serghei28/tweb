@@ -57,6 +57,14 @@
     <Compile Include="Migrations\202505130807005_InitialCreate.Designer.cs">
       <DependentUpon>202505130807005_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505131848123_AddPasswordToUser.cs" />
+    <Compile Include="Migrations\202505131848123_AddPasswordToUser.Designer.cs">
+      <DependentUpon>202505131848123_AddPasswordToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505131914184_AddPasswordToUser1.cs" />
+    <Compile Include="Migrations\202505131914184_AddPasswordToUser1.Designer.cs">
+      <DependentUpon>202505131914184_AddPasswordToUser1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -73,6 +81,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202505130807005_InitialCreate.resx">
       <DependentUpon>202505130807005_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505131848123_AddPasswordToUser.resx">
+      <DependentUpon>202505131848123_AddPasswordToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505131914184_AddPasswordToUser1.resx">
+      <DependentUpon>202505131914184_AddPasswordToUser1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
