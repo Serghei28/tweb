@@ -36,6 +36,8 @@ namespace YourProject.Domain.Models
 
     public class Order
     {
+        public string ShippingAddress { get; set; } = string.Empty;
+
         public int Id { get; set; }
         public int UserId { get; set; }
         public int ShippingAddressId { get; set; }

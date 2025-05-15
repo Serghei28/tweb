@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using YourProject.Domain.Models;
 using tweb.DAL.Data;
 using popitka.ViewModels;
+using System.Collections.Generic;
 
 namespace popitka.Controllers
 {
@@ -18,7 +19,6 @@ namespace popitka.Controllers
             }
         }
 
-        // Регистрация
         public ActionResult Register() => View();
 
         [HttpPost]
@@ -49,7 +49,6 @@ namespace popitka.Controllers
             return RedirectToAction("Login");
         }
 
-        // Логин
         public ActionResult Login() => View();
 
         [HttpPost]
@@ -77,7 +76,6 @@ namespace popitka.Controllers
             return RedirectToAction("Index");
         }
 
-        // Профиль пользователя
         public ActionResult UserProfile()
         {
             if (Session["UserId"] == null)
@@ -94,10 +92,9 @@ namespace popitka.Controllers
             }
         }
 
-        // Создание или редактирование товара (только для админа)
         public ActionResult AddOrEditProduct(int? id)
         {
-            if (Session["IsAdmin"] == null || !(bool)Session["IsAdmin"])
+            if (!(Session["IsAdmin"] is bool isAdmin) || !isAdmin)
                 return RedirectToAction("Login");
 
             using (var db = new AppDbContext())
@@ -113,7 +110,6 @@ namespace popitka.Controllers
             if (!ModelState.IsValid)
                 return View(product);
 
-            // Обновляем ImageUrl
             if (!string.IsNullOrWhiteSpace(imageInput))
                 product.ImageUrl = imageInput.Split(',').Select(x => x.Trim()).FirstOrDefault() ?? "/Content/Images/default.png";
 
@@ -145,12 +141,11 @@ namespace popitka.Controllers
             return RedirectToAction("Index");
         }
 
-        // Удаление продукта (AJAX)
         [HttpPost]
         public ActionResult DeleteProduct(int id)
         {
-            if (Session["IsAdmin"] == null || !(bool)Session["IsAdmin"])
-                return RedirectToAction("Login");
+            if (!(Session["IsAdmin"] is bool isAdmin) || !isAdmin)
+                return new HttpUnauthorizedResult();
 
             using (var db = new AppDbContext())
             {
@@ -162,15 +157,12 @@ namespace popitka.Controllers
                 }
             }
 
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
 
-
-
-        // Админ-панель
         public ActionResult AdminPanel()
         {
-            if (Session["IsAdmin"] == null || !(bool)Session["IsAdmin"])
+            if (!(Session["IsAdmin"] is bool isAdmin) || !isAdmin)
                 return RedirectToAction("Login");
 
             using (var db = new AppDbContext())
@@ -184,7 +176,6 @@ namespace popitka.Controllers
             }
         }
 
-        // Остальные страницы
         public ActionResult ProductDetails(int id)
         {
             using (var db = new AppDbContext())
@@ -197,13 +188,130 @@ namespace popitka.Controllers
             }
         }
 
+        private List<CartItem> GetCart()
+        {
+            var cart = Session["Cart"] as List<CartItem>;
+            if (cart == null)
+            {
+                cart = new List<CartItem>();
+                Session["Cart"] = cart;
+            }
+            return cart;
+        }
+
+
+
+        public ActionResult AddToCart(int productId)
+        {
+            using (var db = new AppDbContext())
+            {
+                var product = db.Products.Find(productId);
+                if (product == null)
+                    return HttpNotFound();
+
+                var cart = GetCart();
+
+                var existingItem = cart.FirstOrDefault(x => x.ProductId == product.Id);
+                if (existingItem != null)
+                {
+                    existingItem.Quantity++;
+                }
+                else
+                {
+                    cart.Add(new CartItem
+                    {
+                        ProductId = product.Id,
+                        ProductName = product.Name,
+                        ImageUrl = product.ImageUrl,
+                        Price = product.Price,
+                        Quantity = 1
+                    });
+                }
+                Session["Cart"] = cart;
+            }
+
+            return RedirectToAction("Cart");
+        }
+
+
+        [HttpGet]
+        public ActionResult Checkout()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult CheckoutConfirmed(FormCollection form)
+        {
+            if (Session["UserId"] == null)
+                return RedirectToAction("Login");
+
+            var cart = Session["Cart"] as List<CartItem>;
+            if (cart == null || !cart.Any())
+                return RedirectToAction("Cart");
+
+            string firstName = form["FirstName"] ?? "";
+            string lastName = form["LastName"] ?? "";
+            string region = form["Region"] ?? "";
+            string city = form["City"] ?? "";
+            string street = form["Street"] ?? "";
+            string zip = form["Zip"] ?? "";
+            string payment = form["PaymentMethod"] ?? "";
+
+            string fullAddress = $"{region}, {city}, {street}, {zip}";
+
+            var order = new Order
+            {
+                UserId = (int)Session["UserId"],
+                Items = cart.Select(c => new OrderItem
+                {
+                    ProductId = c.ProductId,
+                    Quantity = c.Quantity,
+                    Price = c.Price
+                }).ToList(),
+                Status = OrderStatus.Pending,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                ShippingAddress = fullAddress
+            };
+
+            using (var db = new AppDbContext())
+            {
+                db.Orders.Add(order);
+                db.SaveChanges();
+            }
+
+            Session["Cart"] = null;
+            return RedirectToAction("Order");
+        }
+
+
+        public ActionResult Cart()
+        {
+            var cart = Session["Cart"] as List<CartItem> ?? new List<CartItem>();
+            return View(cart);
+        }
+
+        public ActionResult Order()
+        {
+            int userId = (int)Session["UserId"];
+            using (var db = new AppDbContext())
+            {
+                var orders = db.Orders
+                               .Where(o => o.UserId == userId)
+                               .ToList();
+
+                return View(orders);
+            }
+        }
+
+
         public ActionResult Shipping() => View();
         public ActionResult Support() => View();
-        public ActionResult Cart() => View();
+       
         public ActionResult About() => View();
-      
-        public ActionResult Checkout() => View();
-        public ActionResult Order() => View();
+        
         public ActionResult LayoutFooter() => View();
     }
 }

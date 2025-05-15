@@ -422,3 +422,9 @@ a {
         .product-form .flex button {
             align-self: center;
         }
+.flex.justify-end {
+    /* сдвинуть блок вправо с отступом слева */
+    padding-left: 20px;
+    /* можно чуть опустить вниз */
+    margin-top: 10px;
+}
