@@ -8,7 +8,7 @@
     <div class="product-form max-w-3xl mx-auto bg-white rounded-lg shadow-md p-8">
         <h1 class="text-3xl font-bold mb-6">@ViewBag.Title</h1>
 
-        @using (Html.BeginForm("AddOrEditProduct", "Home", FormMethod.Post))
+        @using (Html.BeginForm("AddOrEditProduct", "Product", FormMethod.Post))
         {
             @Html.HiddenFor(m => m.Id)
 

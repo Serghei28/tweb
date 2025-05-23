@@ -6,7 +6,7 @@
 <main class="container mx-auto px-4 py-10">
     <h2 class="text-3xl font-bold mb-8 text-center">Оформление заказа</h2>
 
-    @using (Html.BeginForm("CheckoutConfirmed", "Home", FormMethod.Post))
+    @using (Html.BeginForm("CheckoutConfirmed", "Order", FormMethod.Post))
     {
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
             <h3 class="text-xl font-semibold mb-4">Данные получателя</h3>
@@ -71,7 +71,7 @@
         </div>
 
         <div class="flex justify-between">
-            <a href="@Url.Action("Cart", "Home")" class="text-blue-600 hover:text-blue-800">← Вернуться в корзину</a>
+            <a href="@Url.Action("Cart", "Cart")" class="text-blue-600 hover:text-blue-800">← Вернуться в корзину</a>
             <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
                 Подтвердить заказ
             </button>
