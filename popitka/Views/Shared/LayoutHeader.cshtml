@@ -20,7 +20,7 @@
         <div class="Header">
             <nav class="container mx-auto px-4 py-3">
                 <div class="flex justify-between items-center">
-                    <a href="/Home/Index" class="text-2xl font-bold" style="color: #5F5F5F; ">Alış-Veriş</a>
+                    <a href="/Product/Index" class="text-2xl font-bold" style="color: #5F5F5F; ">Alış-Veriş</a>
 
                     <div class="relative catalog-button ">
                         <button class="flex items-center space-x-1 font-bold" style="color: #5F5F5F; ">
@@ -66,26 +66,26 @@
                     <div class="flex items-center gap-4">
                         @if (isAdmin)
                         {
-                            <a href="/Home/AddOrEditProduct" class="font-bold" title="Добавить товар">➕</a>
+                            <a href="/Product/AddOrEditProduct" class="font-bold" title="Добавить товар">➕</a>
                         }
                         else
                         {
-                            <a href="/Home/Cart" class="font-bold">Корзина</a>
+                            <a href="/Cart/Cart" class="font-bold">Корзина</a>
                         }
 
                         @if (isAdmin)
                         {
-                            <a href="/Home/AdminPanel" class="font-bold">Админ: @userName</a>
-                            <a href="/Home/Logout" class="font-bold" style="color: #5F5F5F;">Выход</a>
+                            <a href="/Admin/AdminPanel" class="font-bold">Админ: @userName</a>
+                            <a href="/Account/Logout" class="font-bold" style="color: #5F5F5F;">Выход</a>
                         }
                         else if (userName != null)
                         {
-                            <a href="/Home/UserProfile" class="font-bold">Привет, @userName</a>
-                            <a href="/Home/Logout" class="font-bold" style="color: #5F5F5F;">Выход</a>
+                            <a href="/Account/UserProfile" class="font-bold">Привет, @userName</a>
+                            <a href="/Account/Logout" class="font-bold" style="color: #5F5F5F;">Выход</a>
                         }
                         else
                         {
-                            <a href="/Home/Login" class="font-bold">Войти</a>
+                            <a href="/Account/Login" class="font-bold">Войти</a>
                         }
                     </div>
 

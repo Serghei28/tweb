@@ -106,7 +106,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\PageController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -118,21 +123,21 @@
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Register.cshtml" />
-    <Content Include="Views\Home\Shipping.cshtml" />
-    <Content Include="Views\Home\Support.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\Cart.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Checkout.cshtml" />
-    <Content Include="Views\Home\Order.cshtml" />
-    <Content Include="Views\Home\UserProfile.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Page\Shipping.cshtml" />
+    <Content Include="Views\Page\Support.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Cart\Cart.cshtml" />
+    <Content Include="Views\Page\About.cshtml" />
+    <Content Include="Views\Order\Checkout.cshtml" />
+    <Content Include="Views\Order\Order.cshtml" />
+    <Content Include="Views\Account\UserProfile.cshtml" />
     <Content Include="Views\Shared\LayoutHeader.cshtml" />
     <Content Include="Views\Shared\LayoutFooter.cshtml" />
-    <Content Include="Views\Home\AdminPanel.cshtml" />
-    <Content Include="Views\Home\AddOrEditProduct.cshtml" />
-    <Content Include="Views\Home\ProductDetails.cshtml" />
+    <Content Include="Views\Admin\AdminPanel.cshtml" />
+    <Content Include="Views\Product\AddOrEditProduct.cshtml" />
+    <Content Include="Views\Product\ProductDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -143,22 +148,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\AdModel\" />
-    <Folder Include="Views\Ads\" />
-    <Folder Include="Views\Default\" />
-    <Folder Include="Views\IOrderService\" />
-    <Folder Include="Views\IPaymentalService\" />
-    <Folder Include="Views\IProductService\" />
-    <Folder Include="Views\IUserService\" />
-    <Folder Include="Views\OrderAPI\" />
-    <Folder Include="Views\OrderService\" />
-    <Folder Include="Views\PaymentAPI\" />
-    <Folder Include="Views\Payment\" />
-    <Folder Include="Views\PeymentService\" />
-    <Folder Include="Views\ProductAPI\" />
-    <Folder Include="Views\ProductSeervice\" />
-    <Folder Include="Views\UserAPI\" />
-    <Folder Include="Views\UserService\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">
