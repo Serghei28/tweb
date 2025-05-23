@@ -1,0 +1,10 @@
+﻿.bg-custom-blue {
+    background-color: #0892D0;
+}
+
+.star {
+    border-radius: 30px;
+    background: #0892D0;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}

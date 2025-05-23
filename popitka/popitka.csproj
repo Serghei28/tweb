@@ -94,7 +94,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\base.css" />
+    <Content Include="Content\header.css" />
+    <Content Include="Content\buttons.css" />
+    <Content Include="Content\product.css" />
+    <Content Include="Content\login.css" />
+    <Content Include="Content\register.css" />
+    <Content Include="Content\utilities.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
