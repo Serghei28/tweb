@@ -1,0 +1,22 @@
+﻿html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    padding-top: 85px;
+}
+
+a {
+    color: #5F5F5F !important;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+    a:hover {
+        color: #2563EB !important;
+    }
+
+.silver-text {
+    color: #5F5F5F;
+}

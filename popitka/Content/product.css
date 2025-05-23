@@ -1,0 +1,37 @@
+﻿.product-image {
+    width: 300px;
+    height: auto;
+    margin-bottom: 1rem;
+    border-radius: 20px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+    .product-image:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 6px rgba(0, 0, 0, 0.5);
+    }
+
+.product-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+    .product-form .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .product-form .flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+.flex.justify-end {
+    justify-content: flex-end;
+}

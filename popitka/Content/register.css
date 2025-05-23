@@ -1,0 +1,31 @@
+﻿.register-page {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+    .register-page .container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .register-page .form .input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .register-page .social-account-container {
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .register-page .Register {
+        margin-top: 1rem;
+        text-align: center;
+    }
