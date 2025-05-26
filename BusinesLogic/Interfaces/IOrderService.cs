@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using YourProject.Domain.Models;
 
 namespace YourProject.BusinessLogic.Interfaces
@@ -10,5 +11,8 @@ namespace YourProject.BusinessLogic.Interfaces
         List<Order> GetUserOrders(int userId);
         Order UpdateOrderStatus(int orderId, OrderStatus status);
         Order CancelOrder(int orderId);
+        List<Order> GetAllOrders();
+        Task<bool> DeleteOrder(int orderId);
+
     }
 }

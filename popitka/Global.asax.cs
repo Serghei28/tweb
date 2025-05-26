@@ -12,6 +12,8 @@ namespace popitka
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            popitka.UnityConfig.RegisterComponents(); // <--- щрн днаюбэ
+
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }

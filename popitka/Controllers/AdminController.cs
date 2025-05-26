@@ -1,30 +1,51 @@
-﻿using popitka.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
-using tweb.DAL.Data;
+using popitka.ViewModels;
+using YourProject.BusinessLogic.Interfaces;
 
 namespace popitka.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly IUserService _userService;
+        private readonly IOrderService _orderService;
+
+        public AdminController(IUserService userService, IOrderService orderService)
+        {
+            _userService = userService;
+            _orderService = orderService;
+        }
+        public async Task<ActionResult> DeleteOrder(int id)
+        {
+            var result = await _orderService.DeleteOrder(id);
+            if (result)
+                return RedirectToAction("OrdersList");
+            else
+                return HttpNotFound();
+        }
+        public async Task<ActionResult> DeleteUser(int id)
+        {
+            bool result = await _userService.DeleteUser(id);
+
+            if (result)
+                return RedirectToAction("UsersList");
+            else
+                return HttpNotFound();
+        }
+
+
         public ActionResult AdminPanel()
         {
             if (!(Session["IsAdmin"] is bool isAdmin) || !isAdmin)
                 return RedirectToAction("Login", "Account");
 
-            using (var db = new AppDbContext())
+            var model = new AdminPanelViewModel
             {
-                var model = new AdminPanelViewModel
-                {
-                    Orders = db.Orders.ToList(),
-                    Users = db.Users.ToList()
-                };
-                return View(model);
-            }
+                Users = _userService.GetAllUsers().Result,
+                Orders = _orderService.GetAllOrders()
+            };
+
+            return View(model);
         }
     }
-
 }

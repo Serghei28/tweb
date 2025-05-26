@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using YourProject.Domain.Models; // Укажи правильное пространство имён моделей
+using YourProject.Domain.Models;
 using YourProject.BusinessLogic.Interfaces;
-using tweb.DAL.Data;      // Подключи AppDbContext
+using tweb.DAL.Data;
+using System.Collections.Generic;
 
 namespace tweb.BusinessLogic.Implementation
 {
@@ -29,6 +29,31 @@ namespace tweb.BusinessLogic.Implementation
             }
         }
 
+        public async Task<User> CreateUser(User user)
+        {
+            using (var db = new AppDbContext())
+            {
+                db.Users.Add(user);
+                db.SaveChanges();
+                return await Task.FromResult(user);
+            }
+        }
+        public async Task<bool> DeleteUser(int id)
+        {
+            using (var db = new AppDbContext())
+            {
+                var user = db.Users.FirstOrDefault(u => u.Id == id);
+                if (user == null)
+                    return await Task.FromResult(false);
+
+                db.Users.Remove(user);
+                db.SaveChanges();
+
+                return await Task.FromResult(true);
+            }
+        }
+
+
         public async Task<User> UpdateUser(int id, User data)
         {
             using (var db = new AppDbContext())
@@ -38,6 +63,7 @@ namespace tweb.BusinessLogic.Implementation
                     throw new Exception("User not found");
 
                 user.Email = data.Email;
+                user.Password = data.Password;
                 user.FirstName = data.FirstName;
                 user.LastName = data.LastName;
                 user.Phone = data.Phone;
@@ -49,11 +75,29 @@ namespace tweb.BusinessLogic.Implementation
             }
         }
 
+        public async Task<User> Authenticate(string email, string password)
+        {
+            using (var db = new AppDbContext())
+            {
+                var user = db.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
+                return await Task.FromResult(user);
+            }
+        }
+
+        // 🔥 Метод для логина по email + password
+        public async Task<User> GetUserByCredentials(string email, string password)
+        {
+            using (var db = new AppDbContext())
+            {
+                var user = db.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
+                return await Task.FromResult(user);
+            }
+        }
+
         public async Task<Address> AddAddress(int userId, Address address)
         {
             using (var db = new AppDbContext())
             {
-                // Проверка пользователя
                 var user = db.Users.FirstOrDefault(u => u.Id == userId);
                 if (user == null)
                     throw new Exception("User not found");
@@ -110,8 +154,15 @@ namespace tweb.BusinessLogic.Implementation
                     throw new Exception("User not found");
 
                 var addresses = db.Addresses.Where(a => a.UserId == userId).ToList();
-
                 return await Task.FromResult(new UserWithAddress(user, addresses));
+            }
+        }
+
+        public async Task<List<User>> GetAllUsers()
+        {
+            using (var db = new AppDbContext())
+            {
+                return await Task.FromResult(db.Users.ToList());
             }
         }
     }

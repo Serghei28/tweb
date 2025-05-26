@@ -52,7 +52,7 @@
                                 @using (Html.BeginForm("Index", "Product", FormMethod.Post, new { @class = "inline" }))
                                 {
                                     @Html.Hidden("id", product.Id)
-                                    <button type="submit" title="Удалить" onclick="return confirm('Удалить товар?')" class="inline bg-transparent border-none text-red-600">
+                                    <button type="submit" title="Удалить" onclick="return confirm('Удалить товар?')" class="delete-product" data-id="@product.Id">
                                         🗑
                                     </button>
                                 }
@@ -77,7 +77,7 @@
 
         if (!confirm("Удалить этот товар?")) return;
 
-        $.post("/Product/Index", { id: id })
+        $.post("/Product/Delete", { id: id })
             .done(function () {
                 location.reload();
             })
@@ -85,4 +85,5 @@
                 alert("Ошибка при удалении.");
             });
     });
+
 </script>
