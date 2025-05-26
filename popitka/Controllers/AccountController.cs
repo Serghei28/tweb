@@ -1,36 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using tweb.DAL.Data;
+using YourProject.BusinessLogic.Interfaces;
 using YourProject.Domain.Models;
 
 namespace popitka.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly IUserService _userService;
+
+        public AccountController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         public ActionResult Register() => View();
 
         [HttpPost]
-        public ActionResult Register(string fullName, string email, string password)
+        public async Task<ActionResult> Register(string fullName, string email, string password)
         {
             var names = fullName.Trim().Split(' ');
             var user = new User
             {
                 Email = email,
                 Password = password,
-                FirstName = names.FirstOrDefault() ?? "",
-                LastName = string.Join(" ", names.Skip(1)),
+                FirstName = names.Length > 0 ? names[0] : "",
+                LastName = names.Length > 1 ? string.Join(" ", names, 1, names.Length - 1) : "",
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };
 
-            using (var db = new AppDbContext())
-            {
-                db.Users.Add(user);
-                db.SaveChanges();
-            }
+            await _userService.UpdateUser(0, user); // Предположим, UpdateUser создаёт, если id == 0
 
             return RedirectToAction("Login");
         }
@@ -38,18 +39,15 @@ namespace popitka.Controllers
         public ActionResult Login() => View();
 
         [HttpPost]
-        public ActionResult Login(string email, string password)
+        public async Task<ActionResult> Login(string email, string password)
         {
-            using (var db = new AppDbContext())
+            var user = await _userService.GetUserByCredentials(email, password); // ✅
+            if (user != null && user.Email == email && user.Password == password)
             {
-                var user = db.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
-                if (user != null)
-                {
-                    Session["UserId"] = user.Id;
-                    Session["UserName"] = user.FirstName;
-                    Session["IsAdmin"] = user.IsAdmin;
-                    return RedirectToAction("Index", "Product");
-                }
+                Session["UserId"] = user.Id;
+                Session["UserName"] = user.FirstName;
+                Session["IsAdmin"] = user.IsAdmin;
+                return RedirectToAction("Index", "Product");
             }
 
             ViewBag.Error = "Неверный email или пароль";
@@ -62,17 +60,14 @@ namespace popitka.Controllers
             return RedirectToAction("Index", "Product");
         }
 
-        public ActionResult UserProfile()
+        public async Task<ActionResult> UserProfile()
         {
-            if (Session["UserId"] == null) return RedirectToAction("Login");
+            if (Session["UserId"] == null)
+                return RedirectToAction("Login");
 
             int userId = (int)Session["UserId"];
-            using (var db = new AppDbContext())
-            {
-                var user = db.Users.Find(userId);
-                return View(user);
-            }
+            var userWithAddresses = await _userService.GetUserWithAddresses(userId);
+            return View(userWithAddresses);
         }
     }
-
 }

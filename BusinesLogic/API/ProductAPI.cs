@@ -27,5 +27,10 @@ namespace YourProject.BusinessLogic.API
         {
             return _products.Where(p => p.Category == category).ToList();
         }
+
+        public List<Product> GetAllProducts()
+        {
+            return _products;
+        }
     }
 }

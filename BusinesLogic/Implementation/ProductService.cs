@@ -1,55 +1,68 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using YourProject.Domain.Models;
 using YourProject.BusinessLogic.Interfaces;
+using tweb.DAL.Data;
 
 namespace YourProject.BusinessLogic.Implementation
 {
     public class ProductService : IProductService
     {
-        // Временное хранилище продуктов для демонстрации
-        private readonly List<Product> _products = new List<Product>();
-
-        public ProductService()
+        public Product GetProductById(int id)
         {
-            // Инициализация демонстрационными данными
-            _products.Add(new Product(1, "MacBook Pro", "Apple laptop", 1999.99m, ProductCategory.Mac, null, null, 10));
-            _products.Add(new Product(2, "iPhone 13", "Apple smartphone", 999.99m, ProductCategory.iPhone, null, null, 20));
-            _products.Add(new Product(3, "iPad Pro", "Apple tablet", 799.99m, ProductCategory.iPad, null, null, 15));
+            using (var db = new AppDbContext())
+            {
+                return db.Products.Find(id);
+            }
         }
 
-        public async Task<IEnumerable<Product>> GetProducts(ProductCategory category)
+        public List<Product> GetAllProducts()
         {
-            // Симуляция асинхронного выполнения
-            return await Task.Run(() => _products.Where(p => p.Category == category));
+            using (var db = new AppDbContext())
+            {
+                return db.Products.ToList();
+            }
         }
 
-        public async Task<Product> GetProductById(int id)
+        public void SaveProduct(Product product)
         {
-            var product = await Task.Run(() => _products.FirstOrDefault(p => p.Id == id));
-            if (product == null)
-                throw new System.Exception("Product not found");
-            return product;
+            using (var db = new AppDbContext())
+            {
+                if (product.Id == 0)
+                {
+                    product.CreatedAt = DateTime.UtcNow;
+                    db.Products.Add(product);
+                }
+                else
+                {
+                    var existing = db.Products.Find(product.Id);
+                    if (existing != null)
+                    {
+                        existing.Name = product.Name;
+                        existing.Description = product.Description;
+                        existing.Price = product.Price;
+                        existing.Stock = product.Stock;
+                        existing.ImageUrl = product.ImageUrl;
+                        existing.Category = product.Category;
+                        existing.UpdatedAt = DateTime.UtcNow;
+                    }
+                }
+                db.SaveChanges();
+            }
         }
 
-        public async Task<IEnumerable<Product>> SearchProducts(string query)
+        public void DeleteProduct(int id)
         {
-            return await Task.Run(() => _products.Where(p => p.Name.Contains(query) || p.Description.Contains(query)));
-        }
-
-        public async Task<IEnumerable<Product>> GetRelatedProducts(int productId)
-        {
-            // Для демонстрации предполагаем, что связанные продукты имеют ту же категорию
-            var product = _products.FirstOrDefault(p => p.Id == productId);
-            if (product == null)
-                throw new System.Exception("Product not found");
-            return await Task.Run(() => _products.Where(p => p.Category == product.Category && p.Id != productId));
-        }
-
-        public async Task<IEnumerable<Product>> GetProductsByIds(IEnumerable<int> ids)
-        {
-            return await Task.Run(() => _products.Where(p => ids.Contains(p.Id)));
+            using (var db = new AppDbContext())
+            {
+                var product = db.Products.Find(id);
+                if (product != null)
+                {
+                    db.Products.Remove(product);
+                    db.SaveChanges();
+                }
+            }
         }
     }
 }

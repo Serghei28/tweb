@@ -39,6 +39,7 @@ namespace YourProject.Domain.Models
         public string Street { get; set; } = string.Empty;
         public string ZipCode { get; set; } = string.Empty;
         public bool IsDefault { get; set; }
+        public Address() { }
 
         public Address(int id, int userId, string country, string city, string street, string zipCode, bool isDefault)
         {
