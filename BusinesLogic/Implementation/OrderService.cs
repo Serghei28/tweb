@@ -89,9 +89,13 @@ namespace YourProject.BusinessLogic.Implementation
         {
             using (var db = new AppDbContext())
             {
-                return db.Orders.Include("Items").ToList();
+                return db.Orders
+                         .Include("User") // ← Это правильно для EF6
+                         .ToList();
             }
         }
+
+
         public async Task<bool> DeleteOrder(int orderId)
         {
             using (var db = new AppDbContext())

@@ -93,6 +93,10 @@
     <Compile Include="Migrations\202505211300335_SyncModels.Designer.cs">
       <DependentUpon>202505211300335_SyncModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505271030560_UpdateProductModel.cs" />
+    <Compile Include="Migrations\202505271030560_UpdateProductModel.Designer.cs">
+      <DependentUpon>202505271030560_UpdateProductModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -136,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505211300335_SyncModels.resx">
       <DependentUpon>202505211300335_SyncModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505271030560_UpdateProductModel.resx">
+      <DependentUpon>202505271030560_UpdateProductModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

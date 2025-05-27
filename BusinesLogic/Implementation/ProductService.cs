@@ -4,6 +4,7 @@ using System.Linq;
 using YourProject.Domain.Models;
 using YourProject.BusinessLogic.Interfaces;
 using tweb.DAL.Data;
+using System.Data.Entity;
 
 namespace YourProject.BusinessLogic.Implementation
 {
@@ -36,21 +37,14 @@ namespace YourProject.BusinessLogic.Implementation
                 }
                 else
                 {
-                    var existing = db.Products.Find(product.Id);
-                    if (existing != null)
-                    {
-                        existing.Name = product.Name;
-                        existing.Description = product.Description;
-                        existing.Price = product.Price;
-                        existing.Stock = product.Stock;
-                        existing.ImageUrl = product.ImageUrl;
-                        existing.Category = product.Category;
-                        existing.UpdatedAt = DateTime.UtcNow;
-                    }
+                    db.Entry(product).State = EntityState.Modified;
+                    product.UpdatedAt = DateTime.UtcNow;
                 }
+
                 db.SaveChanges();
             }
         }
+
 
         public void DeleteProduct(int id)
         {

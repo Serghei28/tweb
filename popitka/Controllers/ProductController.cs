@@ -36,23 +36,56 @@ namespace popitka.Controllers
             if (!(Session["IsAdmin"] is bool isAdmin) || !isAdmin)
                 return RedirectToAction("Login", "Account");
 
-            var product = id.HasValue ? _productService.GetProductById(id.Value) : new Product();
+            Product product;
+
+            if (id.HasValue)
+            {
+                product = _productService.GetProductById(id.Value);
+                if (product == null)
+                    return HttpNotFound();
+            }
+            else
+            {
+                product = new Product();
+            }
+
             return View(product);
         }
 
         [HttpPost]
         public ActionResult AddOrEditProduct(Product product)
         {
+            if (!(Session["IsAdmin"] is bool isAdmin) || !isAdmin)
+                return RedirectToAction("Login", "Account");
+
             if (!ModelState.IsValid)
+            {
                 return View(product);
+            }
 
             if (string.IsNullOrWhiteSpace(product.ImageUrl))
                 product.ImageUrl = "/Content/Images/default.png";
+
+            if (product.Id == 0)
+            {
+                product.CreatedAt = DateTime.UtcNow;
+                product.UpdatedAt = DateTime.UtcNow;
+            }
+            else
+            {
+                var existingProduct = _productService.GetProductById(product.Id);
+                if (existingProduct == null)
+                    return HttpNotFound();
+
+                product.CreatedAt = existingProduct.CreatedAt;
+                product.UpdatedAt = DateTime.UtcNow;
+            }
 
             _productService.SaveProduct(product);
 
             return RedirectToAction("Index");
         }
+
 
 
         [HttpPost]
