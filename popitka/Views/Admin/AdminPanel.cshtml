@@ -27,13 +27,17 @@
                     {
                         <tr class="border-b hover:bg-gray-50">
                             <td class="py-2 px-6">@order.Id</td>
-                            <td class="py-2 px-6">@order.UserId</td>
+                            <td class="py-2 px-6">@(order.User != null ? order.User.FirstName : "—")</td>
                             <td class="py-2 px-6">@order.TotalAmount.ToString("C")</td>
                             <td class="py-2 px-6">@order.Status</td>
                             <td class="py-2 px-6">@order.CreatedAt.ToShortDateString()</td>
                             <td class="py-2 px-6 space-x-2">
                                 <a href="#" class="text-blue-500 hover:underline">Редактировать</a>
-                                <a href="#" class="text-red-500 hover:underline">Удалить</a>
+                                <a href="@Url.Action("DeleteOrder", "Admin", new { id = order.Id })"
+                                   class="text-red-500 hover:underline"
+                                   onclick="return confirm('Удалить заказ?');">
+                                    Удалить
+                                </a>
                             </td>
                         </tr>
                     }
@@ -71,8 +75,17 @@
                                 @(user.IsAdmin ? "Админ" : "Пользователь")
                             </td>
                             <td class="py-2 px-6 space-x-2">
-                                <a href="#" class="text-blue-500 hover:underline">Изменить</a>
-                                <a href="#" class="text-red-500 hover:underline">Удалить</a>
+                                @using (Html.BeginForm(user.IsAdmin ? "RemoveAdmin" : "SetAdmin", "Admin", new { id = user.Id }, FormMethod.Post))
+                                {
+                                    <button type="submit" class="text-green-600 hover:underline">
+                                        @(user.IsAdmin ? "Снять права" : "Назначить админом")
+                                    </button>
+                                }
+                                <a href="@Url.Action("DeleteUser", "Admin", new { id = user.Id })"
+                                   class="text-red-500 hover:underline"
+                                   onclick="return confirm('Удалить пользователя?');">
+                                    Удалить
+                                </a>
                                 <a href="#" class="text-yellow-500 hover:underline">Бан</a>
                             </td>
                         </tr>

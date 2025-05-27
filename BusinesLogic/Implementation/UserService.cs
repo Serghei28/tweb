@@ -157,6 +157,21 @@ namespace tweb.BusinessLogic.Implementation
                 return await Task.FromResult(new UserWithAddress(user, addresses));
             }
         }
+        public async Task<bool> SetAdminRole(int userId, bool isAdmin)
+        {
+            using (var db = new AppDbContext())
+            {
+                var user = db.Users.FirstOrDefault(u => u.Id == userId);
+                if (user == null)
+                    return await Task.FromResult(false);
+
+                user.IsAdmin = isAdmin;
+                db.SaveChanges();
+
+                return await Task.FromResult(true);
+            }
+        }
+
 
         public async Task<List<User>> GetAllUsers()
         {

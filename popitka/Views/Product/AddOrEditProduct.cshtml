@@ -44,11 +44,17 @@
                 @Html.TextBoxFor(m => m.ImageUrl, new { @class = "input w-full", placeholder = "https://..." })
             </div>
 
+
             <div class="mt-6 flex justify-end">
                 <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
                     Сохранить
                 </button>
             </div>
         }
+        @if (TempData["error"] != null)
+        {
+            <p style="color: red">@TempData["error"]</p>
+        }
+
     </div>
 </main>

@@ -18,5 +18,7 @@ namespace YourProject.BusinessLogic.Interfaces
         Task<User> GetUserByCredentials(string email, string password);
         Task<List<User>> GetAllUsers();
         Task<bool> DeleteUser(int id);
+        Task<bool> SetAdminRole(int userId, bool isAdmin);
+
     }
 }

@@ -19,7 +19,7 @@ namespace popitka.Controllers
         {
             var result = await _orderService.DeleteOrder(id);
             if (result)
-                return RedirectToAction("OrdersList");
+                return RedirectToAction("AdminPanel");
             else
                 return HttpNotFound();
         }
@@ -28,7 +28,26 @@ namespace popitka.Controllers
             bool result = await _userService.DeleteUser(id);
 
             if (result)
-                return RedirectToAction("UsersList");
+                return RedirectToAction("AdminPanel");
+            else
+                return HttpNotFound();
+        }
+        [HttpPost]
+        public async Task<ActionResult> SetAdmin(int id)
+        {
+            var result = await _userService.SetAdminRole(id, true);
+            if (result)
+                return RedirectToAction("AdminPanel");
+            else
+                return HttpNotFound();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> RemoveAdmin(int id)
+        {
+            var result = await _userService.SetAdminRole(id, false);
+            if (result)
+                return RedirectToAction("AdminPanel");
             else
                 return HttpNotFound();
         }
